@@ -6,7 +6,7 @@ class AuditionsController < ApplicationController
   respond_to :html
 
   def index
-    @auditions = Audition.all
+    @auditions = @current_user.auditions.all
     respond_with(@auditions)
   end
 
@@ -26,6 +26,7 @@ class AuditionsController < ApplicationController
   def create
     @audition = Audition.new(audition_params)
     @audition.month = Month.select(:id, :name).find_by(name: params[:audition][:month_name], year: params[:audition][:year])
+    @audition.user = @current_user
 
     @audition.save
     respond_with(@audition)
@@ -50,11 +51,11 @@ class AuditionsController < ApplicationController
 
   private
     def set_audition
-      @audition = Audition.find(params[:id])
+      @audition = @current_user.auditions.find(params[:id])
     end
 
     def set_prosecutor
-      @prosecutor = Prosecutor.all
+      @prosecutor = @current_user.prosecutors.all
     end
 
     def audition_params

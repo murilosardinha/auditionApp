@@ -5,7 +5,7 @@ class MonthsController < ApplicationController
   respond_to :html
 
   def index
-    @months = Month.all
+    @months = @current_user.months.all
     respond_with(@months)
   end
 
@@ -23,6 +23,8 @@ class MonthsController < ApplicationController
 
   def create
     @month = Month.new(month_params)
+    @month.user = @current_user
+
     @month.save
     respond_with(@month)
   end
@@ -39,7 +41,7 @@ class MonthsController < ApplicationController
 
   private
     def set_month
-      @month = Month.find(params[:id])
+      @month = @current_user.months.find(params[:id])
     end
 
     def month_params

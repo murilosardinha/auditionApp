@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160625015339) do
+ActiveRecord::Schema.define(version: 20160625062228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,23 +24,31 @@ ActiveRecord::Schema.define(version: 20160625015339) do
     t.integer  "month_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   add_index "auditions", ["month_id"], name: "index_auditions_on_month_id", using: :btree
   add_index "auditions", ["prosecutor_id"], name: "index_auditions_on_prosecutor_id", using: :btree
+  add_index "auditions", ["user_id"], name: "index_auditions_on_user_id", using: :btree
 
   create_table "months", force: true do |t|
     t.string   "name"
     t.string   "year"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "months", ["user_id"], name: "index_months_on_user_id", using: :btree
 
   create_table "prosecutors", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "prosecutors", ["user_id"], name: "index_prosecutors_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.datetime "created_at"

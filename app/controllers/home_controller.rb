@@ -3,13 +3,13 @@ class HomeController < ApplicationController
     @auditions = {rows: [], date: ''}
     date  = Date.today
     @auditions[:date] = date
-    @auditions[:rows] = Audition.all.where(date: date)
+    @auditions[:rows] = @current_user.auditions.all.where(date: date)
 
     year = date.strftime("%Y")
-    @months = Month.select(:id, :name, :year).where(year: year)
+    @months = @current_user.months.select(:id, :name, :year).where(year: year)
 
     @counts = [{prose: {}, count: '0', until: ''}]
-    prosecutors = Prosecutor.select(:id, :name).all
+    prosecutors = @current_user.prosecutors.select(:id, :name).all
     month = date.month
 
     prosecutors.each_with_index do |prosecutor, index|

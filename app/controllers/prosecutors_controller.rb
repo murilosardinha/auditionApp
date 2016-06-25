@@ -5,7 +5,7 @@ class ProsecutorsController < ApplicationController
   respond_to :html
 
   def index
-    @prosecutors = Prosecutor.all
+    @prosecutors = @current_user.prosecutors.all
     respond_with(@prosecutors)
   end
 
@@ -23,6 +23,8 @@ class ProsecutorsController < ApplicationController
 
   def create
     @prosecutor = Prosecutor.new(prosecutor_params)
+    @prosecutor.user = @current_user
+
     @prosecutor.save
     respond_with(@prosecutor)
   end
@@ -39,7 +41,7 @@ class ProsecutorsController < ApplicationController
 
   private
     def set_prosecutor
-      @prosecutor = Prosecutor.find(params[:id])
+      @prosecutor = @current_user.prosecutors.find(params[:id])
     end
 
     def prosecutor_params
