@@ -1,0 +1,26 @@
+<h1>Listing auditions for <%= l @auditions[:date], format: :long %></h1>
+
+  <% @auditions[:rows].each do |audition| %>
+    <%= audition.prosecutor_name %>
+    <%= audition.courte %>
+    <%= audition.turn %>
+    <%= link_to 'Show', audition %>
+    <%= link_to 'Destroy', audition, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
+<br>
+<%= link_to "Ver agendamento de #{l @auditions[:date], format: :month}",
+  filter_audition_path(month_name: "#{l @auditions[:date], format: :month}", year:"#{l @auditions[:date], format: :year}" ) %>
+
+<section>
+  <div>Nova Auditoria</div>
+  <%- @months.each do |month| %>
+    <%= link_to month.name, new_audition_path(year: month.year, month_name: month.name) %>
+  <% end %>
+</section>
+
+<section>
+  <div>Contador de auditoria </div>
+  <%- @counts.each do |count| %>
+    <%= count[:prose] %> - <%= count[:count] %>
+  <% end %>
+</section>

@@ -1,0 +1,30 @@
+<h1>Listing auditions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Prosecutor</th>
+      <th>Courte</th>
+      <th>Turn</th>
+      <th>Date</th>
+      <th>Month</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @auditions.each do |audition| %>
+      <tr>
+        <td><%= audition.prosecutor_name %></td>
+        <td><%= audition.courte %></td>
+        <td><%= audition.turn %></td>
+        <td><%= audition.date %></td>
+        <td><%= audition.month %></td>
+        <td><%= link_to 'Show', audition %></td>
+        <td><%= link_to 'Destroy', audition, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

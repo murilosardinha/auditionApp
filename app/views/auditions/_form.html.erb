@@ -1,0 +1,37 @@
+<%= form_for(@audition) do |f| %>
+  <% if @audition.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@audition.errors.count, "error") %> prohibited this audition from being saved:</h2>
+
+      <ul>
+      <% @audition.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :procurador %><br>
+    <%= f.select :prosecutor_id, @prosecutor.map{|pr| [pr.name, pr.id]} %>
+  </div>
+  <div class="field">
+    <%= f.label :vara %><br>
+    <%= f.select :courte, [['1ª vara', '1ª vara'], ['2ª vara', '2ª vara']] %>
+  </div>
+  <div class="field">
+    <%= f.label :turno %><br>
+    <%= f.select :turn, [['Manhã', 'manhã'], ['Tarde', 'tarde']] %>
+  </div>
+  <div class="field">
+    <%= f.label :data %><br>
+    <%= f.date_select :date %>
+  </div>
+
+  <%= hidden_field :audition, :month_name, value: params[:month_name] %>
+  <%= hidden_field :audition, :year, value: params[:year] %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  prosecutor: MyString
+  courte: MyString
+  turn: MyString
+  date: 2016-06-24
+  prosecutor_id: 
+  month_id: 
+
+two:
+  prosecutor: MyString
+  courte: MyString
+  turn: MyString
+  date: 2016-06-24
+  prosecutor_id: 
+  month_id: 
