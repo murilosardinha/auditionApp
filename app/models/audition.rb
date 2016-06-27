@@ -6,5 +6,5 @@ class Audition < ActiveRecord::Base
   delegate :name, to: :prosecutor, prefix: true
   delegate :name, to: :month, prefix: true
 
-  scope :by_date_month, lambda { |date, month| where('date <= ? and extract(month from date) = ?', date, month) }
+  scope :by_month, lambda { |month| where('extract(month from date) = ?', month) }
 end

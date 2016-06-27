@@ -46,7 +46,14 @@ class AuditionsController < ApplicationController
     year = params[:year]
     month_name = params[:month_name].downcase
     @month     = @current_user.months.find_by(name: month_name, year: year)
-    @auditions = @current_user.auditions.where(month: @month)
+
+    t('date.month_names').length.times do |index|
+      if (t('date.month_names')[index] == @month.name.capitalize) && !(t('date.month_names')[index].nil?)
+        @month_num = index
+      end
+    end
+
+    @auditions = @current_user.auditions.by_month(@month_num)
   end
 
   private
