@@ -1,0 +1,61 @@
+<!-- Sidebar -->
+<div class="navbar-default sidebar" role="navigation">
+  <div class="sidebar-nav navbar-collapse">
+
+    <ul class="nav" id="side-menu">
+      <li class="sidebar-search">
+      <div class="input-group custom-search-form">
+        <input type="text" class="form-control" placeholder="Search...">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">
+            <i class="fa fa-search"></i>
+          </button>
+        </span>
+      </div>
+      </li>
+      <li>
+        <%= link_to home_path, class: 'active' do %>
+          <i class="fa fa-home fa-fw"></i> Início
+        <% end %>
+      </li>
+
+      <%- if controller.controller_name == 'home'%>
+        <li>
+          <a href="#"><i class="fa fa-list fa-fw"></i> Ver agendamentos<span class="fa arrow"></span></a>
+          <ul class="nav nav-second-level">
+            <li>
+              <%= link_to filter_audition_path(month_name: "#{l @auditions[:date], format: :month}", year:"#{l @auditions[:date], format: :year}" ), class: 'active' do %>
+                <i class="fa fa-hand-o-right fa-fw"></i> Ver agendamento de <%= l @auditions[:date], format: :month %>
+              <% end %>
+            </li>
+          </ul>
+        </li>
+      <% end %>
+
+      <li>
+        <a href="#"><i class="fa fa-plus-circle fa-fw"></i> Novos agendamentos<span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+          <%- @months.each do |month| %>
+            <li>
+              <%= link_to new_audition_path(year: month.year, month_name: month.name) do %>
+                <i class="fa fa-plus-square-o fa-fw"></i> <%= month.name %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+
+      <li>
+        <%= link_to months_path do %>
+          <i class="fa fa-plus-square-o fa-fw"></i> Adicionar novo Mês
+        <% end %>
+      </li>
+
+      <li>
+        <%= link_to prosecutors_path do %>
+          <i class="fa fa-plus-square-o fa-fw"></i> Adicionar novo Procurador
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</div>

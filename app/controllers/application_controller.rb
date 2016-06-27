@@ -1,9 +1,11 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
+  layout :check_login
+
   protect_from_forgery with: :exception
+
   before_action :set_locale
   before_action :set_current_user
+  before_action :set_user_months
 
   def after_sign_in_path_for(resource)
     home_path
@@ -20,4 +22,15 @@ class ApplicationController < ActionController::Base
   def set_current_user
     @current_user = current_user
   end
+
+  def set_user_months
+    @date   = Date.today
+    @year   = @date.strftime("%Y")
+    @months = @current_user.months.select(:id, :name, :year).where(year: @year)
+  end
+
+  private
+    def check_login
+      user_signed_in? ? "application" : "unsigned"
+    end
 end

@@ -1,26 +1,40 @@
-<h1>Listing auditions for <%= l @auditions[:date], format: :long %></h1>
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">
+      Audiências do dia <%= l @auditions[:date], format: :long %>
+    </h1>
+  </div>
+</div>
 
-  <% @auditions[:rows].each do |audition| %>
-    <%= audition.prosecutor_name %>
-    <%= audition.courte %>
-    <%= audition.turn %>
-    <%= link_to 'Show', audition %>
-    <%= link_to 'Destroy', audition, method: :delete, data: { confirm: 'Are you sure?' } %>
+<section class="col-lg-8">
+  <div class="">
+  <% if @auditions[:rows].empty? %>
+    <div class="alert alert-warning">Nenhuma audiência cadastrada</div>
+  <% else %>
+    <div> Audiências agendadas</div>
+    <% @auditions[:rows].each do |audition| %>
+      <%= audition.prosecutor_name %>
+      <%= audition.courte %>
+      <%= audition.turn %>
+      <%= link_to 'Show', audition %>
+      <%= link_to 'Destroy', audition, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
   <% end %>
-<br>
-<%= link_to "Ver agendamento de #{l @auditions[:date], format: :month}",
-  filter_audition_path(month_name: "#{l @auditions[:date], format: :month}", year:"#{l @auditions[:date], format: :year}" ) %>
-
-<section>
-  <div>Nova Auditoria</div>
-  <%- @months.each do |month| %>
-    <%= link_to month.name, new_audition_path(year: month.year, month_name: month.name) %>
-  <% end %>
+  </div>
 </section>
 
-<section>
-  <div>Contador de auditoria </div>
-  <%- @counts.each do |count| %>
-    <%= count[:prose] %> - <%= count[:count] %>
-  <% end %>
+<section class="col-lg-4">
+  <div class="panel panel-success">
+    <div class="panel-heading">Contador de audiências realizadas</div>
+    <div class="panel-body">
+      <%- @counts.each do |count| %>
+        <strong>
+          <%= count[:prose] %>
+        </strong>
+        <span class="label label-success">
+          <%= count[:count] %>
+        </span>
+      <% end %>
+    </div>
+  </div>
 </section>
