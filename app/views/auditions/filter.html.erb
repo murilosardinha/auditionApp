@@ -1,28 +1,34 @@
-<h1>Listing auditions - <%= @month.name.upcase %> de <%= @month.year %></h1>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      Mostrando audiências de <%= @month.name.capitalize %> de <%= @month.year %>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Procurador</th>
+          <th>Vara</th>
+          <th>Turno</th>
+          <th>Data</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Procurador</th>
-      <th>Vara</th>
-      <th>Turno</th>
-      <th>Data</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
+      <tbody>
+        <%- @auditions.each do |audition| %>
+          <tr>
+            <td><%= audition.prosecutor_name %></td>
+            <td><%= audition.courte %></td>
+            <td><%= audition.turn %></td>
+            <td><%= l audition.date, format: :short %></td>
+            <td><%= link_to 'Show', audition %></td>
+            <td><%= link_to 'Destroy', audition, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-  <tbody>
-    <% @auditions.each do |audition| %>
-      <tr>
-        <td><%= audition.prosecutor_name %></td>
-        <td><%= audition.courte %></td>
-        <td><%= audition.turn %></td>
-        <td><%= l audition.date, format: :short %></td>
-        <td><%= link_to 'Show', audition %></td>
-        <td><%= link_to 'Destroy', audition, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>

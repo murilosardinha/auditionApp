@@ -45,8 +45,8 @@ class AuditionsController < ApplicationController
   def filter
     year = params[:year]
     month_name = params[:month_name].downcase
-    @month     = Month.find_by(name: month_name, year: year)
-    @auditions = Audition.all.where(month: @month)
+    @month     = @current_user.months.find_by(name: month_name, year: year)
+    @auditions = @current_user.auditions.where(month: @month)
   end
 
   private

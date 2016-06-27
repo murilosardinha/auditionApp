@@ -1,40 +1,87 @@
 <div class="row">
   <div class="col-lg-12">
-    <h1 class="page-header">
-      Audiências do dia <%= l @auditions[:date], format: :long %>
-    </h1>
+    <div class="panel-heading">
+      <h1 class="panel-title">
+        Audiências do dia <%= l @auditions[:date], format: :long %>
+      </h1>
+    </div>
+
   </div>
 </div>
 
 <section class="col-lg-8">
-  <div class="">
   <% if @auditions[:rows].empty? %>
-    <div class="alert alert-warning">Nenhuma audiência cadastrada</div>
+    <div class="alert alert-warning">Nenhuma audiência cadastrada para hoje.</div>
   <% else %>
-    <div> Audiências agendadas</div>
-    <% @auditions[:rows].each do |audition| %>
-      <%= audition.prosecutor_name %>
-      <%= audition.courte %>
-      <%= audition.turn %>
-      <%= link_to 'Show', audition %>
-      <%= link_to 'Destroy', audition, method: :delete, data: { confirm: 'Are you sure?' } %>
-    <% end %>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title"> Audiências agendadas</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Procurador </th>
+              <th>Vara</th>
+              <th>Período</th>
+              <th colspan="2"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @auditions[:rows].each do |audition| %>
+              <tr>
+                <td><%= audition.prosecutor_name %></td>
+                <td><%= audition.courte %></td>
+                <td><%= audition.turn %></td>
+                <td><%= link_to 'Show', audition %></td>
+                <td><%= link_to 'Destroy', audition, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </td>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
   <% end %>
-  </div>
 </section>
 
 <section class="col-lg-4">
-  <div class="panel panel-success">
-    <div class="panel-heading">Contador de audiências realizadas</div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Audiências até o momento</h3>
+    </div>
+
     <div class="panel-body">
-      <%- @counts.each do |count| %>
-        <strong>
-          <%= count[:prose] %>
-        </strong>
-        <span class="label label-success">
-          <%= count[:count] %>
-        </span>
-      <% end %>
+      <table class="table table-hover">
+        <thead>
+          <tr class="row">
+            <th class="pull-left">Procurador</th>
+            <th class="pull-right">Quantidade</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <%- @counts.each do |count| %>
+            <tr>
+              <td>
+                <strong>
+                  <%= count[:prose] %>
+                </strong>
+              <td>
+
+              <td>
+                <% if count[:count] == @min %>
+                  <span class="label label-danger">
+                <% else %>
+                  <span class="label label-success">
+                <% end %>
+                    <%= count[:count] %>
+                  </span>
+              <td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
