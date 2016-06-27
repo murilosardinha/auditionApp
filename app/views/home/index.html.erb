@@ -54,9 +54,9 @@
     <div class="panel-body">
       <table class="table table-hover">
         <thead>
-          <tr class="row">
-            <th class="">Procurador</th>
-            <th class="">Quantidade</th>
+          <tr>
+            <th>Procurador</th>
+            <th>Quantidade</th>
           </tr>
         </thead>
 
@@ -67,17 +67,21 @@
                 <strong>
                   <%= count[:prose] %>
                 </strong>
-              <td>
+              </td>
 
-              <td>
-                <% if count[:count] == @min %>
+              <% if count[:count] == @min %>
+                <td>
                   <span class="label label-danger">
-                <% else %>
-                  <span class="label label-success">
-                <% end %>
                     <%= count[:count] %>
                   </span>
-              <td>
+                </td>
+              <% else %>
+               <td>
+                  <span class="label label-success">
+                    <%= count[:count] %>
+                  </span>
+                </td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>
