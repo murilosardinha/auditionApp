@@ -24,9 +24,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_user_months
-    @date   = Date.today
-    @year   = @date.strftime("%Y")
-    @months = @current_user.months.select(:id, :name, :year).where(year: @year)
+    if user_signed_in?
+      @date   = Date.today
+      @year   = @date.strftime("%Y")
+      @months = @current_user.months.select(:id, :name, :year).where(year: @year)
+    end
   end
 
   private

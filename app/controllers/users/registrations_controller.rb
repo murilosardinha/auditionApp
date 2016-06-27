@@ -8,9 +8,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+    date = Date.today
+    Month.create(year: date.strftime("%Y"), name: (l date, format: :month).downcase, user: current_user)
+  end
 
   # GET /resource/edit
   # def edit
