@@ -38,7 +38,7 @@
           <%- @months.each do |month| %>
             <li>
               <%= link_to new_audition_path(year: month.year, month_name: month.name) do %>
-                <i class="fa fa-plus-square-o fa-fw"></i> <%= month.name %>
+                <i class="fa fa-plus-square-o fa-fw"></i> <%= month.name.capitalize %>
               <% end %>
             </li>
           <% end %>
