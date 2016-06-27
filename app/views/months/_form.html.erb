@@ -1,16 +1,4 @@
 <%= form_for(@month) do |f| %>
-  <% if @month.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@month.errors.count, "error") %> prohibited this month from being saved:</h2>
-
-      <ul>
-      <% @month.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="field">
     <%= f.label :nome %><br>
     <%= f.text_field :name, placeholder: 'ex: julho' %>
