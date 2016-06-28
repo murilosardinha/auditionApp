@@ -23,11 +23,13 @@
         <li>
           <a href="#"><i class="fa fa-list fa-fw"></i> Ver agendamentos<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
-            <li>
-              <%= link_to filter_audition_path(month_name: "#{l @auditions[:date], format: :month}", year:"#{l @auditions[:date], format: :year}" ), class: 'active' do %>
-                <i class="fa fa-hand-o-right fa-fw"></i> Ver agendamento de <%= l @auditions[:date], format: :month %>
-              <% end %>
-            </li>
+            <%- @months.each do |month| %>
+              <li>
+                <%= link_to filter_audition_path(month_name: month.name, year: @year ), class: 'active' do %>
+                  <i class="fa fa-hand-o-right fa-fw"></i> <%= month.name.capitalize %>
+                <% end %>
+              </li>
+            <% end %>
           </ul>
         </li>
       <% end %>
