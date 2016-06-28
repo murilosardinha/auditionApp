@@ -24,7 +24,7 @@
             <td><%= audition.turn %></td>
             <td><%= l audition.date, format: :short %></td>
             <td><%= link_to 'Show', audition %></td>
-            <td><%= link_to 'Destroy', audition, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= button_to 'Destroy', audition, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
       </tbody>

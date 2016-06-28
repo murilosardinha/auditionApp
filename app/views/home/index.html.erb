@@ -35,7 +35,7 @@
                 <td><%= audition.courte %></td>
                 <td><%= audition.turn %></td>
                 <td><%= link_to 'Show', audition %></td>
-                <td><%= link_to 'Destroy', audition, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <td><%= button_to 'Destroy', audition, method: :delete, data: { confirm: 'Are you sure?' } %></td>
               </td>
             <% end %>
           </tbody>

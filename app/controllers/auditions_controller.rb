@@ -39,7 +39,7 @@ class AuditionsController < ApplicationController
 
   def destroy
     @audition.destroy
-    respond_with(@audition)
+    redirect_to filter_audition_path(year: @year, month_name: ( l @date, format: :month ))
   end
 
   def filter
